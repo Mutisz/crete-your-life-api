@@ -1,0 +1,58 @@
+# import ActivityTranslation from "../../generated/schema/prisma.graphql"
+# import BookingDate from "../../generated/schema/prisma.graphql"
+# import Currency from "../../generated/schema/prisma.graphql"
+
+type Activity {
+  name: String!
+  shortDescription: String!
+  description: String!
+  pricePerPerson: Int!
+  category: String!
+  difficulty: String!
+  earliestStartHour: String
+  latestStartHour: String
+  durationHours: String
+  translations: [ActivityTranslation]!
+  images: [Image]!
+}
+
+type Image {
+  isThumbnail: Boolean!
+  filePath: String!
+  fileName: String!
+  url: String
+}
+
+type Booking {
+  number: String!
+  email: String!
+  phone: String!
+  personCount: Int!
+  priceTotal: Int!
+  dates: [BookingDate]!
+}
+
+input BookingCreateInput {
+  email: String!
+  phone: String!
+  personCount: Int!
+  priceTotal: Int!
+  dates: [BookingDateInput]!
+}
+
+input BookingDateInput {
+  date: DateTime!
+  activity: String
+}
+
+type Query {
+  activities: [Activity]
+  currencies: [Currency]
+  booking(number: String!): Booking
+  bookingDates(fromDate: DateTime!, toDate: DateTime!): [BookingDate]
+}
+
+type Mutation {
+  createBooking(data: BookingCreateInput!): Booking
+  updateCurrencyRates: [Currency]
+}

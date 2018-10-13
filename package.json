@@ -1,0 +1,36 @@
+{
+  "name": "crete-your-life-api",
+  "version": "0.0.1",
+  "description": "GraphQL API for Crete your Life trip booking application",
+  "author": "Coral Software Mateusz Tokarski",
+  "license": "GPL-3.0-or-later",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node build/index.js",
+    "debug": "nodemon --inspect --exec babel-node src/index.js",
+    "build": "babel src -d build"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.329.0",
+    "dotenv": "^6.0.0",
+    "fixer-node": "^2.0.0",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.10.0",
+    "graphql-yoga": "^1.16.2",
+    "http-errors": "^1.7.1",
+    "joi": "^13.7.0",
+    "prisma-client-lib": "^1.17.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^9.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.6.1",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^2.7.0",
+    "nodemon": "^1.18.4",
+    "prettier": "1.14.2"
+  }
+}

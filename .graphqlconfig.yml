@@ -1,0 +1,11 @@
+projects:
+  api:
+    schemaPath: ./src/schema/api.graphql
+    extensions:
+      endpoints:
+        default: ${env:API_HOST}
+  prisma:
+    schemaPath: ./generated/schema/prisma.graphql
+    extensions:
+      endpoints:
+        default: ${env:PRISMA_HOST}

@@ -1,0 +1,51 @@
+type Activity {
+  name: String! @unique
+  shortDescription: String!
+  description: String!
+  pricePerPerson: Int!
+  category: String!
+  difficulty: String!
+  earliestStartHour: String
+  latestStartHour: String
+  durationHours: String
+  translations: [ActivityTranslation!]!
+  images: [Image!]!
+}
+
+type ActivityTranslation {
+  name: String! @unique
+  language: String!
+  shortDescription: String!
+  description: String!
+  activity: Activity!
+}
+
+type Image {
+  id: ID! @unique
+  isThumbnail: Boolean!
+  filePath: String!
+  fileName: String!
+  caption: String
+}
+
+type Booking {
+  number: String! @unique
+  email: String!
+  phone: String!
+  personCount: Int!
+  priceTotal: Int!
+  dates: [BookingDate!]!
+}
+
+type BookingDate {
+  id: ID! @unique
+  booking: Booking!
+  date: DateTime!
+  activity: Activity
+}
+
+type Currency {
+  code: String! @unique
+  rate: Float!
+  date: DateTime!
+}
