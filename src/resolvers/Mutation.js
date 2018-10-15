@@ -1,11 +1,11 @@
 import { map } from "lodash";
-import uuidv1 from "uuid/v1";
+import shortid from "shortid";
 
 const getLatestCurrencyRates = async currency => await currency.latest();
 
 const createBookingPayload = data => ({
   ...data,
-  number: uuidv1(),
+  number: shortid.generate(),
   dates: {
     create: map(data.dates, bookingDate => ({
       date: bookingDate.date,
