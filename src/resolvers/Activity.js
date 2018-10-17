@@ -1,8 +1,11 @@
-const Activity = {
+export const Activity = {
   translations: (parent, args, { prisma }) =>
     prisma.activity({ name: parent.name }).translations(),
   images: (parent, args, { prisma }) =>
     prisma.activity({ name: parent.name }).images()
 };
 
-export default Activity;
+export const Query = {
+  activities: (parent, args, { prisma }, info) =>
+    prisma.activities({ orderBy: "name_ASC" }, info)
+};

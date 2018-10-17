@@ -52,12 +52,12 @@ input BookingDateInput {
 type Query {
   activities: [Activity]
   currencies: [Currency]
+  bookingPrice(data: BookingCalculatePriceInput): Int
   booking(number: String!): Booking
   bookingDates(fromDate: DateTime!, toDate: DateTime!): [BookingDate]
 }
 
 type Mutation {
-  calculateBookingPrice(data: BookingCalculatePriceInput): Int
   createBooking(data: BookingCreateInput!): Booking
   updateCurrencyRates: [Currency]
 }
