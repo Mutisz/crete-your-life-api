@@ -32,11 +32,15 @@ type Booking {
   dates: [BookingDate]!
 }
 
+input BookingCalculatePriceInput {
+  personCount: Int!
+  dates: [BookingDateInput]!
+}
+
 input BookingCreateInput {
   email: String!
   phone: String!
   personCount: Int!
-  priceTotal: Int!
   dates: [BookingDateInput]!
 }
 
@@ -53,6 +57,7 @@ type Query {
 }
 
 type Mutation {
+  calculateBookingPrice(data: BookingCalculatePriceInput): Int
   createBooking(data: BookingCreateInput!): Booking
   updateCurrencyRates: [Currency]
 }
