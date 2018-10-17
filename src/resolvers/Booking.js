@@ -14,7 +14,7 @@ const calculateBookingDatePrice = curry(
       throw new Error("Activity not found");
     }
 
-    return totalPrice + get(activity, "pricePerPerson");
+    return totalPrice + personCount * get(activity, "pricePerPerson");
   }
 );
 
@@ -64,5 +64,5 @@ export const Query = {
 
 export const Mutation = {
   createBooking: async (parent, { data }, { prisma }, info) =>
-    prisma.createBooking(await getCreateBookingPayload(data), info)
+    prisma.createBooking(await getCreateBookingPayload(prisma, data), info)
 };
