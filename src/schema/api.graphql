@@ -7,6 +7,8 @@ type Activity {
   shortDescription: String!
   description: String!
   pricePerPerson: Int!
+  minPersonCount: Int!
+  maxPersonCount: Int!
   category: String!
   difficulty: String!
   earliestStartHour: String
@@ -32,6 +34,12 @@ type Booking {
   dates: [BookingDate]!
 }
 
+type BookingDateOccupancy {
+  date: String!
+  activity: Activity
+  personCount: Int!
+}
+
 input BookingCalculatePriceInput {
   personCount: Int!
   dates: [BookingDateInput]!
@@ -45,7 +53,7 @@ input BookingCreateInput {
 }
 
 input BookingDateInput {
-  date: DateTime!
+  date: String!
   activity: String
 }
 
@@ -54,7 +62,10 @@ type Query {
   currencies: [Currency]
   bookingPrice(data: BookingCalculatePriceInput): Int
   booking(number: String!): Booking
-  bookingDates(fromDate: DateTime!, toDate: DateTime!): [BookingDate]
+  bookingDatesOccupancy(
+    fromDate: String!
+    toDate: String!
+  ): [BookingDateOccupancy]
 }
 
 type Mutation {

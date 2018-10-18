@@ -3,6 +3,8 @@ type Activity {
   shortDescription: String!
   description: String!
   pricePerPerson: Int!
+  minPersonCount: Int!
+  maxPersonCount: Int!
   category: String!
   difficulty: String!
   earliestStartHour: String
@@ -40,12 +42,12 @@ type Booking {
 type BookingDate {
   id: ID! @unique
   booking: Booking!
-  date: DateTime!
+  date: String!
   activity: Activity
 }
 
 type Currency {
   code: String! @unique
   rate: Float!
-  date: DateTime!
+  date: String!
 }

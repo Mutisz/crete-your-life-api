@@ -5,6 +5,8 @@ mutation {
       shortDescription: "Unfeeling so rapturous discovery he exquisite."
       description: "Unfeeling so rapturous discovery he exquisite. Reasonably so middletons or impression by terminated. Old pleasure required removing elegance him had. Down she bore sing saw calm high. Of an or game gate west face shed. no great but music too old found arose. Improved own provided blessing may peculiar domestic. Sight house has sex never. No visited raising gravity outward subject my cottage mr be. Hold do at tore in park feet near my case. Invitation at understood occasional sentiments insipidity inhabiting in. Off melancholy alteration principles old. Is do speedily kindness properly oh. Respect article painted cottage he is offices parlors."
       pricePerPerson: 6000
+      minPersonCount: 2
+      maxPersonCount: 4
       category: "trekking"
       difficulty: "hard"
       earliestStartHour: "06:00"
@@ -44,6 +46,8 @@ mutation {
       shortDescription: "Up unpacked friendly ecstatic so possible humoured do."
       description: "Up unpacked friendly ecstatic so possible humoured do. Ample end might folly quiet one set spoke her. We no am former valley assure. Four need spot ye said we find mile. Are commanded him convinced dashwoods did estimable forfeited. Shy celebrated met sentiments she reasonably but. Proposal its disposed eat advanced marriage sociable. Drawings led greatest add subjects endeavor gay remember. Principles one yet assistance you met impossible. "
       pricePerPerson: 10000
+      minPersonCount: 2
+      maxPersonCount: 4
       category: "trekking"
       difficulty: "medium"
       earliestStartHour: "06:00"
@@ -77,7 +81,9 @@ mutation {
       name: "Lissos"
       shortDescription: "Terminated principles sentiments of no pianoforte if projection impossible."
       description: "Unfeeling so rapturous discovery he exquisite. Reasonably so middletons or impression by terminated. Old pleasure required removing elegance him had. Down she bore sing saw calm high. Of an or game gate west face shed. no great but music too old found arose. Improved own provided blessing may peculiar domestic. Sight house has sex never. No visited raising gravity outward subject my cottage mr be. Hold do at tore in park feet near my case. Invitation at understood occasional sentiments insipidity inhabiting in. Off melancholy alteration principles old. Is do speedily kindness properly oh. Respect article painted cottage he is offices parlors."
-      pricePerPerson: 400
+      pricePerPerson: 4000
+      minPersonCount: 2
+      maxPersonCount: 4
       category: "leisure"
       difficulty: "easy"
       earliestStartHour: "08:00"
@@ -112,6 +118,8 @@ mutation {
       shortDescription: "Sitting mistake towards his few country ask."
       description: "Sitting mistake towards his few country ask. You delighted two rapturous six depending objection happiness something the. Off nay impossible dispatched partiality unaffected. Norland adapted put ham cordial. Ladies talked may shy basket narrow see. Him she distrusts questions sportsmen. Tolerably pretended neglected on my earnestly by. Sex scale sir style truth ought. "
       pricePerPerson: 12000
+      minPersonCount: 2
+      maxPersonCount: 4
       category: "history"
       difficulty: "easy"
       earliestStartHour: "08:00"
@@ -146,6 +154,8 @@ mutation {
       shortDescription: "Not him old music think his found enjoy merry."
       description: "Not him old music think his found enjoy merry. Listening acuteness dependent at or an. Apartments thoroughly unsatiable terminated sex how themselves. She are ten hours wrong walls stand early. Domestic perceive on an ladyship extended received do. Why jennings our whatever his learning gay perceive. Is against no he without subject. Bed connection unreserved preference partiality not unaffected. Years merit trees so think in hoped we as. "
       pricePerPerson: 8000
+      minPersonCount: 2
+      maxPersonCount: 4
       category: "cities"
       difficulty: "easy"
       earliestStartHour: "08:00"

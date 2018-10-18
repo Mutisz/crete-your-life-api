@@ -8,7 +8,7 @@ import {
   Query as BookingQuery,
   Mutation as BookingMutation
 } from "./Booking";
-import BookingDate from "./BookingDate";
+import { BookingDate, Query as BookingDateQuery } from "./BookingDate";
 import Image from "./Image";
 
 const resolvers = {
@@ -16,7 +16,12 @@ const resolvers = {
   Booking,
   BookingDate,
   Image,
-  Query: Object.assign(CurrencyQuery, ActivityQuery, BookingQuery),
+  Query: Object.assign(
+    CurrencyQuery,
+    ActivityQuery,
+    BookingQuery,
+    BookingDateQuery
+  ),
   Mutation: Object.assign(CurrencyMutation, BookingMutation)
 };
 

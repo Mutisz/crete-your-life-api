@@ -25,15 +25,6 @@ const calculateBookingPrice = async (prisma, { personCount, dates }) =>
     Promise.resolve(0)
   );
 
-const getBookingDatesPayload = (fromDate, toDate) => ({
-  where: {
-    date_gte: fromDate,
-    date_lte: toDate,
-    NOT: { activity: null }
-  },
-  orderBy: "date_ASC"
-});
-
 const getCreateBookingPayload = async (prisma, data) => ({
   ...data,
   number: shortid.generate(),
@@ -57,9 +48,7 @@ export const Query = {
   bookingPrice: async (parent, { data }, { prisma }) =>
     calculateBookingPrice(prisma, data),
   booking: (parent, { number }, { prisma }, info) =>
-    prisma.booking({ number }, info),
-  bookingDates: (parent, { fromDate, toDate }, { prisma }, info) =>
-    prisma.bookingDates(getBookingDatesPayload(fromDate, toDate), info)
+    prisma.booking({ number }, info)
 };
 
 export const Mutation = {
