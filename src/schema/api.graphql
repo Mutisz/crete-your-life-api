@@ -58,8 +58,9 @@ input BookingDateInput {
 }
 
 type Query {
-  activities: [Activity]
   currencies: [Currency]
+  activities: [Activity]
+  activity(name: String!): Activity
   bookingPrice(data: BookingCalculatePriceInput): Int
   booking(number: String!): Booking
   bookingDatesOccupancy(
@@ -69,6 +70,6 @@ type Query {
 }
 
 type Mutation {
-  createBooking(data: BookingCreateInput!): Booking
   updateCurrencyRates: [Currency]
+  createBooking(data: BookingCreateInput!): Booking
 }
