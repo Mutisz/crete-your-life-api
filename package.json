@@ -6,9 +6,9 @@
   "license": "GPL-3.0-or-later",
   "main": "src/index.js",
   "scripts": {
-    "start": "npm run build-prisma && npm run build-app && node --require dotenv/config build/index.js",
-    "debug": "nodemon --inspect --exec babel-node src/index.js",
-    "build-prisma": "prisma generate",
+    "start": "nodemon --inspect --exec babel-node src/index.js",
+    "serve": "npm run build-prisma && npm run build-app && node --require dotenv/config build/index.js",
+    "build-prisma": "prisma deploy",
     "build-app": "babel src -d build"
   },
   "dependencies": {
@@ -18,12 +18,12 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "dotenv": "^6.1.0",
+    "envalid": "^4.1.4",
     "fixer-node": "^2.0.0",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.10.0",
     "graphql-yoga": "^1.16.2",
     "http-errors": "^1.7.1",
-    "joi": "^14.0.0",
     "prisma": "^1.19.1",
     "prisma-client-lib": "^1.18.0",
     "shortid": "^2.2.13"
