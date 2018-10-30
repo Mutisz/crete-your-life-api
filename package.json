@@ -7,8 +7,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon --inspect --exec babel-node src/index.js",
-    "serve": "npm run build-prisma && npm run build-app && node --require dotenv/config build/index.js",
-    "build-prisma": "prisma deploy",
+    "serve": "npm run build-prisma-client && npm run build-app && node --require dotenv/config build/index.js",
+    "build-prisma-client": "prisma generate",
     "build-app": "babel src -d build"
   },
   "dependencies": {
