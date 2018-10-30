@@ -38,14 +38,11 @@ const configSchema = joi
   .required();
 
 const createConfig = () => {
-  const config = dotenv.config();
-  if (config.error) throw config.error;
-
-  const { parsed } = config;
-  const { error, value: validated } = joi.validate(parsed, configSchema);
-  if (error) throw error;
-
-  return validated;
+  // const config = dotenv.config();
+  // const { parsed } = config;
+  // const { error, value: validated } = joi.validate(parsed, configSchema);
+  // if (error) throw error;
+  return process.env;
 };
 
 export default createConfig;
