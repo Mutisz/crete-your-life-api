@@ -7,34 +7,34 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon --inspect --exec babel-node src/index.js",
-    "serve": "npm run build-prisma-client && npm run build-app && node --require dotenv/config build/index.js",
-    "deploy-prisma": "prisma deploy",
-    "build-prisma-client": "prisma generate",
-    "build-app": "babel src -d build"
+    "serve": "npm run build && npm run prisma-generate && node --require dotenv/config build/index.js",
+    "build": "babel src -d build",
+    "prisma-deploy": "prisma deploy",
+    "prisma-generate": "prisma generate"
   },
   "dependencies": {
-    "aws-sdk": "^2.334.0",
+    "aws-sdk": "^2.348.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
-    "dotenv": "^6.1.0",
+    "dotenv-safe": "^6.1.0",
     "envalid": "^4.1.4",
     "fixer-node": "^2.0.0",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.10.0",
-    "graphql-yoga": "^1.16.2",
+    "graphql-yoga": "^1.16.7",
     "http-errors": "^1.7.1",
-    "prisma": "^1.19.1",
-    "prisma-client-lib": "^1.18.0",
+    "prisma": "^1.19.3",
+    "prisma-client-lib": "^1.19.3",
     "shortid": "^2.2.13"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.7.0",
+    "eslint": "^5.8.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "nodemon": "^1.18.4",
+    "nodemon": "^1.18.5",
     "prettier": "1.14.3"
   }
 }
