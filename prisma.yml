@@ -6,6 +6,10 @@ generate:
     output: generated/client
   - generator: graphql-schema
     output: generated/schema
+subscriptions:
+  bookingCreated:
+    query: prisma/subscriptions/bookingCreated.graphql
+    webhook: ${env:HANDLER_BOOKING_CREATED}
 seed:
   import: prisma/seed.graphql
 hooks:

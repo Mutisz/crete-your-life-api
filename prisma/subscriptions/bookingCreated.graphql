@@ -1,0 +1,10 @@
+subscription {
+  booking(where: { mutation_in: [CREATED] }) {
+    node {
+      number
+      email
+      personCount
+      priceTotal
+    }
+  }
+}

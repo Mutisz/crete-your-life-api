@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "description": "GraphQL API for Crete your Life trip booking application",
   "author": "Coral Software Mateusz Tokarski",
-  "license": "GPL-3.0-or-later",
+  "license": "GPL-3.0",
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon --inspect --exec babel-node src/index.js",
     "serve": "npm run build-prisma-client && npm run build-app && node --require dotenv/config build/index.js",
+    "deploy-prisma": "prisma deploy",
     "build-prisma-client": "prisma generate",
     "build-app": "babel src -d build"
   },
