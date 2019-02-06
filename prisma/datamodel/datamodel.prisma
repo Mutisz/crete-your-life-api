@@ -36,6 +36,7 @@ type Booking {
   phone: String!
   personCount: Int!
   priceTotal: Int!
+  preferredLanguage: String!
   dates: [BookingDate!]!
 }
 

@@ -1,14 +1,14 @@
-import {
-  Query as CurrencyQuery,
-  Mutation as CurrencyMutation
-} from "./Currency";
 import { Activity, Query as ActivityQuery } from "./Activity";
 import {
   Booking,
+  Mutation as BookingMutation,
   Query as BookingQuery,
-  Mutation as BookingMutation
 } from "./Booking";
 import { BookingDate, Query as BookingDateQuery } from "./BookingDate";
+import {
+  Mutation as CurrencyMutation,
+  Query as CurrencyQuery,
+} from "./Currency";
 import Image from "./Image";
 
 const resolvers = {
@@ -20,9 +20,9 @@ const resolvers = {
     CurrencyQuery,
     ActivityQuery,
     BookingQuery,
-    BookingDateQuery
+    BookingDateQuery,
   ),
-  Mutation: Object.assign(CurrencyMutation, BookingMutation)
+  Mutation: Object.assign(CurrencyMutation, BookingMutation),
 };
 
 export default resolvers;

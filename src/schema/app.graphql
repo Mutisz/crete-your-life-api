@@ -1,6 +1,4 @@
-# import ActivityTranslation from "../../generated/schema/prisma.graphql"
-# import BookingDate from "../../generated/schema/prisma.graphql"
-# import Currency from "../../generated/schema/prisma.graphql"
+# import * from "../generated/schema/prisma.graphql"
 
 type Activity {
   name: String!
@@ -31,6 +29,7 @@ type Booking {
   phone: String!
   personCount: Int!
   priceTotal: Int!
+  preferredLanguage: String!
   dates: [BookingDate]!
 }
 
@@ -49,6 +48,7 @@ input BookingCreateInput {
   email: String!
   phone: String!
   personCount: Int!
+  preferredLanguage: String!
   dates: [BookingDateInput]!
 }
 

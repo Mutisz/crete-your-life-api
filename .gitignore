@@ -12,5 +12,5 @@ node_modules/
 .elasticbeanstalk/
 
 # Build directories
-generated/
-build/
+generated
+dist

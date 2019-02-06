@@ -1,0 +1,6 @@
+{
+  "extends": ["tslint:recommended"],
+  "linterOptions": {
+    "exclude": ["src/generated/**"]
+  }
+}

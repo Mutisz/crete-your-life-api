@@ -1,4 +1,4 @@
-import { curry, reduce, map, get } from "lodash";
+import { curry, get, map, reduce } from "lodash";
 import shortid from "shortid";
 
 const calculateBookingDatePrice = curry(
@@ -15,14 +15,14 @@ const calculateBookingDatePrice = curry(
     }
 
     return totalPrice + personCount * get(activity, "pricePerPerson");
-  }
+  },
 );
 
 const calculateBookingPrice = async (prisma, { personCount, dates }) =>
   reduce(
     dates,
     calculateBookingDatePrice(prisma, personCount),
-    Promise.resolve(0)
+    Promise.resolve(0),
   );
 
 const getCreateBookingPayload = async (prisma, data) => ({
@@ -30,28 +30,28 @@ const getCreateBookingPayload = async (prisma, data) => ({
   number: shortid.generate(),
   priceTotal: await calculateBookingPrice(prisma, data),
   dates: {
-    create: map(data.dates, bookingDate => ({
+    create: map(data.dates, (bookingDate) => ({
       date: bookingDate.date,
       activity: bookingDate.activity
         ? { connect: { name: bookingDate.activity } }
-        : null
-    }))
-  }
+        : null,
+    })),
+  },
 });
 
 export const Booking = {
   dates: (parent, args, { prisma }) =>
-    prisma.booking({ number: parent.number }).dates()
+    prisma.booking({ number: parent.number }).dates(),
 };
 
 export const Query = {
   bookingPrice: async (parent, { data }, { prisma }) =>
     calculateBookingPrice(prisma, data),
   booking: (parent, { number }, { prisma }, info) =>
-    prisma.booking({ number }, info)
+    prisma.booking({ number }, info),
 };
 
 export const Mutation = {
   createBooking: async (parent, { data }, { prisma }, info) =>
-    prisma.createBooking(await getCreateBookingPayload(prisma, data), info)
+    prisma.createBooking(await getCreateBookingPayload(prisma, data), info),
 };

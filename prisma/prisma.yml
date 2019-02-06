@@ -1,0 +1,18 @@
+datamodel: datamodel/datamodel.prisma
+endpoint: ${env:PRISMA_HOST}
+secret: ${env:PRISMA_SECRET}
+generate:
+  - generator: typescript-client
+    output: ../src/generated/client
+  - generator: graphql-schema
+    output: ../src/generated/schema
+subscriptions:
+  bookingCreated:
+    query: subscriptions/bookingCreated.graphql
+    webhook:
+      url: ${env:HANDLER_BOOKING_CREATED}
+seed:
+  import: seed/seed.graphql
+hooks:
+  post-deploy:
+    - prisma generate

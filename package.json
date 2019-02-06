@@ -5,36 +5,39 @@
   "author": "Coral Software Mateusz Tokarski",
   "license": "GPL-3.0",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mutisz/crete-your-life-api"
+  },
   "scripts": {
-    "start": "nodemon --inspect --exec babel-node src/index.js",
-    "serve": "npm run build && npm run prisma-generate && node --require dotenv/config build/index.js",
-    "build": "babel src -d build",
-    "prisma-deploy": "prisma deploy",
-    "prisma-generate": "prisma generate"
+    "dev": "npm-run-all --parallel start playground",
+    "start": "nodemon -e ts,graphql -x ts-node -r dotenv/config src/index.ts",
+    "playground": "graphql playground",
+    "build": "rm -rf dist && prisma generate && tsc",
+    "prisma-generate": "prisma generate",
+    "prisma-deploy": "prisma deploy"
   },
   "dependencies": {
-    "aws-sdk": "^2.348.0",
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "dotenv-safe": "^6.1.0",
-    "envalid": "^4.1.4",
+    "aws-sdk": "^2.397.0",
     "fixer-node": "^2.0.0",
-    "graphql": "^0.13.2",
-    "graphql-tag": "^2.10.0",
-    "graphql-yoga": "^1.16.7",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.4",
+    "graphql-yoga": "^1.17.4",
     "http-errors": "^1.7.1",
-    "prisma": "^1.19.3",
-    "prisma-client-lib": "^1.19.3",
-    "shortid": "^2.2.13"
+    "prisma-binding": "^2.3.2",
+    "prisma-client-lib": "^1.26.1",
+    "shortid": "^2.2.14"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "nodemon": "^1.18.5",
-    "prettier": "1.14.3"
+    "dotenv": "6.2.0",
+    "nodemon": "^1.18.9",
+    "npm-run-all": "^4.1.5",
+    "prettier": "1.14.3",
+    "prisma": "^1.26.1",
+    "ts-node": "^8.0.2",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.1",
+    "typescript-tslint-plugin": "^0.3.1"
   }
 }

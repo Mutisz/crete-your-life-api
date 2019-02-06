@@ -5,6 +5,7 @@ subscription {
       email
       personCount
       priceTotal
+      preferredLanguage
     }
   }
 }
