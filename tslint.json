@@ -2,5 +2,6 @@
   "extends": ["tslint:recommended"],
   "linterOptions": {
     "exclude": ["src/generated/**"]
-  }
+  },
+  "rules": { "interface-name": false }
 }

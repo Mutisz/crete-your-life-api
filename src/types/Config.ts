@@ -1,4 +1,4 @@
-export default interface IConfig {
+export interface Config {
   API_HOST: string;
   PRISMA_HOST: string;
   PRISMA_PORT: number;

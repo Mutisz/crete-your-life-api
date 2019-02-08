@@ -6,17 +6,17 @@ import createStorageService from "./services/storage";
 
 import resolvers from "../resolvers";
 
-import IConfig from "./types/IConfig";
-import IContext from "./types/IContext";
+import { Config } from "../types/Config";
+import { Context } from "../types/Context";
 
-const createContext = (config: IConfig): IContext => ({
+const createContext = (config: Config): Context => ({
   config,
   currency: createCurrencyService(config),
   prisma: createPrismaService(config),
   storage: createStorageService(config),
 });
 
-const createServer = (config: IConfig) =>
+const createServer = (config: Config) =>
   new GraphQLServer({
     context: createContext(config),
     resolvers,

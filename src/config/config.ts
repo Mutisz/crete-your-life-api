@@ -1,6 +1,6 @@
-import IConfig from "./types/IConfig";
+import { Config } from "../types/Config";
 
-const createConfig = (): IConfig => ({
+const createConfig = (): Config => ({
   API_HOST: process.env.API_HOST,
   DB_HOST: process.env.DB_HOST,
   DB_PASSWORD: process.env.DB_PASSWORD,

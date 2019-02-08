@@ -16,13 +16,13 @@ const resolvers = {
   Booking,
   BookingDate,
   Image,
+  Mutation: Object.assign(CurrencyMutation, BookingMutation),
   Query: Object.assign(
     CurrencyQuery,
     ActivityQuery,
     BookingQuery,
     BookingDateQuery,
   ),
-  Mutation: Object.assign(CurrencyMutation, BookingMutation),
 };
 
 export default resolvers;
