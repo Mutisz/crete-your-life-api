@@ -3,6 +3,7 @@ schema: src/schema/app.graphql
 context: src/types/Context.ts:Context
 models:
   files:
+    - src/generated/client/index.ts
     - src/types/model.ts
 output: src/generated/resolvers.ts
 resolver-scaffolding:

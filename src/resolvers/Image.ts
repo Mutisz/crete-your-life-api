@@ -1,5 +1,12 @@
-const url = (parent, args, { storage, config }) => {
-  const { filePath, fileName } = parent;
+import { Image } from "../generated/client";
+import { ImageResolvers } from "../generated/resolvers";
+import { Context } from "../types/Context";
+
+const url = (
+  { filePath, fileName }: Image,
+  args,
+  { storage, config }: Context,
+) => {
   if (!filePath || !fileName) {
     throw new Error("Both file path and name are required");
   }
@@ -10,8 +17,7 @@ const url = (parent, args, { storage, config }) => {
   });
 };
 
-const Image = {
+export const Resolvers: ImageResolvers.Type = {
+  ...ImageResolvers.defaultResolvers,
   url,
 };
-
-export default Image;

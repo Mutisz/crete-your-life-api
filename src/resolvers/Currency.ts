@@ -1,24 +1,38 @@
 import { map } from "lodash";
 
-const getLatestCurrencyRates = async (currency) => await currency.latest();
+import { CurrencyResolvers } from "../generated/resolvers";
+import { Context } from "../types/Context";
 
 const upsertCurrencyPayload = (rate, code, date) => ({
-  where: { code },
-  update: { rate, date },
   create: { code, rate, date },
+  update: { rate, date },
+  where: { code },
 });
 
-export const Query = {
-  currencies: (parent, args, { prisma }, info) =>
-    prisma.currencies({ orderBy: "code_ASC" }, info),
+const getLatestCurrencyRates = async (currency) => await currency.latest();
+
+const currencies = (parent, args, { prisma }: Context) =>
+  prisma.currencies({ orderBy: "code_ASC" });
+
+const updateCurrencyRates = async (
+  parent,
+  args,
+  { prisma, currency }: Context,
+) => {
+  const { date, rates } = await getLatestCurrencyRates(currency);
+  return Promise.all(
+    map(rates, (rate, code) =>
+      prisma.upsertCurrency(upsertCurrencyPayload(rate, code, date)),
+    ),
+  );
 };
 
-export const Mutation = {
-  updateCurrencyRates: async (parent, args, { prisma, currency }) => {
-    const latest = await getLatestCurrencyRates(currency);
-    const { date, rates } = latest;
-    return map(rates, (rate, code) =>
-      prisma.upsertCurrency(upsertCurrencyPayload(rate, code, date)),
-    );
-  },
+export const Query = {
+  currencies,
+};
+
+export const Mutation = { updateCurrencyRates };
+
+export const Resolvers: CurrencyResolvers.Type = {
+  ...CurrencyResolvers.defaultResolvers,
 };

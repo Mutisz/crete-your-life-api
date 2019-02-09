@@ -19,7 +19,7 @@ const createContext = (config: Config): Context => ({
 const createServer = (config: Config) =>
   new GraphQLServer({
     context: createContext(config),
-    resolvers,
+    resolvers: resolvers as any,
     typeDefs: "src/schema/app.graphql",
   });
 
