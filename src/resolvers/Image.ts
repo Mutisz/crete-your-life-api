@@ -4,7 +4,7 @@ import { Context } from "../types/Context";
 
 const url = (
   { filePath, fileName }: Image,
-  args,
+  args: any,
   { storage, config }: Context,
 ) => {
   if (!filePath || !fileName) {

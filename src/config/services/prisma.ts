@@ -3,6 +3,10 @@ import { Prisma } from "../../generated/client";
 import { Config } from "../../types/Config";
 
 const createPrismaService = (config: Config) =>
-  new Prisma({ endpoint: config.PRISMA_HOST, secret: config.PRISMA_SECRET });
+  new Prisma({
+    endpoint: config.PRISMA_HOST,
+    secret: config.PRISMA_SECRET,
+    debug: false,
+  });
 
 export default createPrismaService;

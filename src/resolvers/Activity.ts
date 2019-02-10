@@ -1,11 +1,11 @@
 import { ActivityResolvers, QueryResolvers } from "../generated/resolvers";
 import { Context } from "../types/Context";
 
-const activities = (parent, args, { prisma }: Context) =>
+const activities = (parent: any, args: any, { prisma }: Context) =>
   prisma.activities({ orderBy: "name_ASC" });
 
 const activity = (
-  parent,
+  parent: any,
   args: QueryResolvers.ArgsActivity,
   { prisma }: Context,
 ) => prisma.activity({ name: args.name });

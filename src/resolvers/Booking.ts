@@ -1,5 +1,8 @@
-import { curry, map, reduce } from "lodash";
+import { map } from "lodash";
 import shortid from "shortid";
+
+import calculateBookingPrice from "./functions/calculateBookingPrice";
+import validateBooking from "./functions/validateBooking";
 
 import {
   BookingCreateInput as PrismaBookingCreateInput,
@@ -12,41 +15,7 @@ import {
 } from "../generated/resolvers";
 import { Context } from "../types/Context";
 
-const addBookingPriceForDate = curry(
-  async (
-    prisma: Prisma,
-    personCount: number,
-    accPromise: Promise<number>,
-    date: QueryResolvers.BookingDateInput,
-  ) => {
-    const acc = await accPromise;
-
-    const activityName = date.activity;
-    if (activityName === null) {
-      return acc;
-    }
-
-    const activity = await prisma.activity({ name: activityName });
-    if (activity === null) {
-      throw new Error("Activity not found");
-    }
-
-    return acc + personCount * activity.pricePerPerson;
-  },
-);
-
-const calculateBookingPrice = async (
-  prisma: Prisma,
-  personCount: number,
-  dates: QueryResolvers.BookingDateInput[],
-) =>
-  reduce(
-    dates,
-    addBookingPriceForDate(prisma, personCount),
-    Promise.resolve(0),
-  );
-
-const getCreateBookingDatesPayload = (
+const createBookingDatesPayload = (
   data: MutationResolvers.BookingCreateInput,
 ) => ({
   create: map(data.dates, (bookingDate) => ({
@@ -57,33 +26,46 @@ const getCreateBookingDatesPayload = (
   })),
 });
 
-const getCreateBookingPayload = async (
+const createBookingPayload = async (
   prisma: Prisma,
   data: MutationResolvers.BookingCreateInput,
 ): Promise<PrismaBookingCreateInput> => ({
   ...data,
-  dates: getCreateBookingDatesPayload(data),
+  dates: createBookingDatesPayload(data),
   number: shortid.generate(),
   priceTotal: await calculateBookingPrice(prisma, data.personCount, data.dates),
 });
 
 const booking = (
-  parent,
+  parent: any,
   args: QueryResolvers.ArgsBooking,
   { prisma }: Context,
-) => prisma.booking({ number: args.number });
+) => {
+  return prisma.booking({ number: args.number });
+};
 
-const bookingPrice = async (
-  parent,
+const bookingPrice = (
+  parent: any,
   args: QueryResolvers.ArgsBookingPrice,
   { prisma }: Context,
 ) => calculateBookingPrice(prisma, args.data.personCount, args.data.dates);
 
 const createBooking = async (
-  parent,
+  parent: any,
   args: MutationResolvers.ArgsCreateBooking,
   { prisma }: Context,
-) => prisma.createBooking(await getCreateBookingPayload(prisma, args.data));
+) => {
+  const { data } = args;
+
+  try {
+    await validateBooking(prisma, data);
+  } catch (error) {
+    throw error;
+  }
+
+  const payload = await createBookingPayload(prisma, data);
+  return prisma.createBooking(payload);
+};
 
 export const Query = {
   booking,

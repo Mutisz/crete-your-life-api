@@ -5,6 +5,7 @@
     "lib": ["esnext", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
+    "baseUrl": ".",
     // "noImplicitAny": true,
     "esModuleInterop": true,
     "sourceMap": true,

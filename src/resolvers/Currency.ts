@@ -11,12 +11,12 @@ const upsertCurrencyPayload = (rate, code, date) => ({
 
 const getLatestCurrencyRates = async (currency) => await currency.latest();
 
-const currencies = (parent, args, { prisma }: Context) =>
+const currencies = (parent: any, args: any, { prisma }: Context) =>
   prisma.currencies({ orderBy: "code_ASC" });
 
 const updateCurrencyRates = async (
-  parent,
-  args,
+  parent: any,
+  args: any,
   { prisma, currency }: Context,
 ) => {
   const { date, rates } = await getLatestCurrencyRates(currency);
