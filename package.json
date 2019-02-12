@@ -10,14 +10,20 @@
     "url": "https://github.com/Mutisz/crete-your-life-api"
   },
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "cd dist && node --require dotenv/config src/index.js",
+    "serve": "cd dist && node src/index.js",
     "dev": "npm-run-all --parallel debug playground",
     "debug": "nodemon",
     "playground": "graphql playground",
-    "build": "rm -rf dist && rm -rf src/generated && npm-run-all prisma-generate resolver-generate && tsc",
-    "resolver-generate": "graphqlgen",
-    "prisma-generate": "prisma generate",
-    "prisma-deploy": "prisma deploy"
+    "zip": "npm run build && zip dist/crete-your-life-api.zip -r dist package.json package-lock.json",
+    "build": "npm-run-all build-clear generate build-typescript build-copy-artifacts",
+    "build-clear": "rm -rf dist && rm -rf src/generated",
+    "build-typescript": "tsc",
+    "build-copy-artifacts": "cp -r src/schema dist/src && cp -r src/generated/schema dist/src/generated",
+    "generate": "npm-run-all generate-prisma generate-resolver",
+    "generate-prisma": "prisma generate",
+    "generate-resolver": "graphqlgen",
+    "deploy-prisma": "prisma deploy"
   },
   "dependencies": {
     "aws-sdk": "^2.400.0",
