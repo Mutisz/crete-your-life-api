@@ -2,7 +2,7 @@ projects:
   app:
     schemaPath: src/schema/app.graphql
     includes: [
-      "schema.graphql", 
+      "app.graphql", 
       "prisma.graphql",
     ]
     extensions:

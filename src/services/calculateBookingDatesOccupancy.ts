@@ -1,21 +1,8 @@
+import { BookingDate, Prisma } from "../generated/client";
+import { BookingDateOccupancy } from "../types/model";
+
 import { curry, find, reduce } from "lodash";
-
-import { BookingDate, Prisma } from "../../generated/client";
-import { BookingDateOccupancy } from "../../types/model";
-
-const findBookingDatesWithActivity = (
-  prisma: Prisma,
-  fromDate: string,
-  toDate: string,
-) =>
-  prisma.bookingDates({
-    orderBy: "date_ASC",
-    where: {
-      NOT: { activity: null },
-      date_gte: fromDate,
-      date_lte: toDate,
-    },
-  });
+import { findBookingDatesWithActivity } from "../repositories/bookingDates";
 
 const addBookingDateOccupancy = curry(
   async (

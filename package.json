@@ -26,7 +26,7 @@
     "deploy-prisma": "prisma deploy"
   },
   "dependencies": {
-    "aws-sdk": "^2.400.0",
+    "aws-sdk": "^2.403.0",
     "fixer-node": "^2.0.0",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
@@ -34,11 +34,11 @@
     "graphql-yoga": "^1.17.4",
     "http-errors": "^1.7.1",
     "prisma-binding": "^2.3.2",
-    "prisma-client-lib": "^1.26.4",
+    "prisma-client-lib": "^1.26.5",
     "shortid": "^2.2.14"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.120",
+    "@types/lodash": "^4.14.121",
     "@types/shortid": "0.0.29",
     "dotenv": "^6.2.0",
     "graphql-resolver-codegen": "0.0.3",

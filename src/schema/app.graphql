@@ -67,6 +67,7 @@ type Query {
     fromDate: String!
     toDate: String!
   ): [BookingDateOccupancy]
+  lockedDates(fromDate: String!, toDate: String!): [String]
 }
 
 type Mutation {

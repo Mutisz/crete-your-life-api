@@ -1,7 +1,7 @@
-import { curry, reduce } from "lodash";
+import { Prisma } from "../generated/client";
+import { QueryResolvers } from "../generated/resolvers";
 
-import { Prisma } from "../../generated/client";
-import { QueryResolvers } from "../../generated/resolvers";
+import { curry, reduce } from "lodash";
 
 const calculateBookingPriceForDate = async (
   prisma: Prisma,

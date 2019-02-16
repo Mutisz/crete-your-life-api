@@ -1,8 +1,8 @@
 import { map } from "lodash";
 import shortid from "shortid";
 
-import calculateBookingPrice from "./functions/calculateBookingPrice";
-import validateBooking from "./functions/validateBooking";
+import calculateBookingPrice from "../services/calculateBookingPrice";
+import validateBooking from "../services/validateBooking";
 
 import {
   BookingCreateInput as PrismaBookingCreateInput,
@@ -57,13 +57,9 @@ const createBooking = async (
 ) => {
   const { data } = args;
 
-  try {
-    await validateBooking(prisma, data);
-  } catch (error) {
-    throw error;
-  }
-
+  await validateBooking(prisma, data);
   const payload = await createBookingPayload(prisma, data);
+
   return prisma.createBooking(payload);
 };
 

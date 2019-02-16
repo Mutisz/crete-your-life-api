@@ -3,7 +3,8 @@ import {
   QueryResolvers,
 } from "../generated/resolvers";
 import { Context } from "../types/Context";
-import calculateBookingDatesOccupancy from "./functions/calculateBookingDatesOccupancy";
+
+import calculateBookingDatesOccupancy from "../services/calculateBookingDatesOccupancy";
 
 const bookingDatesOccupancy = (
   parent: any,

@@ -1,7 +1,7 @@
 version: "3"
 services:
   prisma:
-    image: prismagraphql/prisma:1.25
+    image: prismagraphql/prisma:1.26
     restart: always
     ports:
       - ${PRISMA_PORT}:${PRISMA_PORT}
@@ -27,4 +27,4 @@ services:
     ports:
       - ${DB_PORT}:3306
 volumes:
-  ? mysql
+  mysql:

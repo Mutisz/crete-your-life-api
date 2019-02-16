@@ -47,6 +47,11 @@ type BookingDate {
   activity: Activity
 }
 
+type LockedDate {
+  id: ID! @unique
+  date: String!
+}
+
 type Currency {
   code: String! @unique
   rate: Float!
