@@ -13,14 +13,14 @@ const createContext = (config: Config): Context => ({
   config,
   currency: createCurrencyService(config),
   prisma: createPrismaService(config),
-  storage: createStorageService(config),
+  storage: createStorageService(config)
 });
 
 const createServer = (config: Config) =>
   new GraphQLServer({
     context: createContext(config),
     resolvers: resolvers as any,
-    typeDefs: "src/schema/app.graphql",
+    typeDefs: "src/schema/app.graphql"
   });
 
 export default createServer;

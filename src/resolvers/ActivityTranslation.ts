@@ -1,7 +1,7 @@
-import { ActivityTranslationResolvers } from "../generated/resolvers";
+import { ActivityTranslationResolvers } from "../codegen/resolvers";
 
 export const Resolvers: ActivityTranslationResolvers.Type = {
   ...ActivityTranslationResolvers.defaultResolvers,
   activity: ({ name }, args, { prisma }) =>
-    prisma.activityTranslation({ name }).activity(),
+    prisma.activityTranslation({ name }).activity()
 };

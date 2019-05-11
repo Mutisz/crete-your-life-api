@@ -1,12 +1,12 @@
-import { Prisma } from "../generated/client";
-import { QueryResolvers } from "../generated/resolvers";
-
 import { curry, reduce } from "lodash";
+
+import { Prisma } from "../codegen/prisma/client";
+import { QueryResolvers } from "../codegen/resolvers";
 
 const calculateBookingPriceForDate = async (
   prisma: Prisma,
   personCount: number,
-  date: QueryResolvers.BookingDateInput,
+  date: QueryResolvers.BookingDateInput
 ) => {
   const activityName = date.activity;
   if (activityName !== null) {
@@ -22,27 +22,27 @@ const addBookingPriceForDate = curry(
     prisma: Prisma,
     personCount: number,
     accPromise: Promise<number>,
-    date: QueryResolvers.BookingDateInput,
+    date: QueryResolvers.BookingDateInput
   ) => {
     const priceForDate = await calculateBookingPriceForDate(
       prisma,
       personCount,
-      date,
+      date
     );
 
     return (await accPromise) + priceForDate;
-  },
+  }
 );
 
 const calculateBookingPrice = async (
   prisma: Prisma,
   personCount: number,
-  dates: QueryResolvers.BookingDateInput[],
+  dates: QueryResolvers.BookingDateInput[]
 ) =>
   reduce(
     dates,
     addBookingPriceForDate(prisma, personCount),
-    Promise.resolve(0),
+    Promise.resolve(0)
   );
 
 export default calculateBookingPrice;

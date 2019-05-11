@@ -9,7 +9,7 @@ import { Resolvers as ImageResolvers } from "./Image";
 import { Mutation } from "./Mutation";
 import { Query } from "./Query";
 
-import { Resolvers } from "../generated/resolvers";
+import { Resolvers } from "../codegen/resolvers";
 
 const resolvers: Resolvers = {
   Activity: ActivityResolvers,
@@ -20,7 +20,7 @@ const resolvers: Resolvers = {
   Currency: CurrencyResolvers,
   Image: ImageResolvers,
   Mutation,
-  Query,
+  Query
 };
 
 export default resolvers;

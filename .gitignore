@@ -11,6 +11,8 @@ node_modules/
 # Elastic Beanstalk Files
 .elasticbeanstalk/
 
+# Code generation directories
+codegen
+
 # Build directories
-generated
 dist

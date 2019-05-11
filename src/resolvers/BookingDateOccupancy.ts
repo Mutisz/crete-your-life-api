@@ -1,21 +1,21 @@
+import calculateBookingDatesOccupancy from "../services/calculateBookingDatesOccupancy";
+
 import {
   BookingDateOccupancyResolvers,
-  QueryResolvers,
-} from "../generated/resolvers";
+  QueryResolvers
+} from "../codegen/resolvers";
 import { Context } from "../types/Context";
-
-import calculateBookingDatesOccupancy from "../services/calculateBookingDatesOccupancy";
 
 const bookingDatesOccupancy = (
   parent: any,
   { fromDate, toDate }: QueryResolvers.ArgsBookingDatesOccupancy,
-  { prisma }: Context,
+  { prisma }: Context
 ) => calculateBookingDatesOccupancy(prisma, fromDate, toDate);
 
 export const Query = {
-  bookingDatesOccupancy,
+  bookingDatesOccupancy
 };
 
 export const Resolvers: BookingDateOccupancyResolvers.Type = {
-  ...BookingDateOccupancyResolvers.defaultResolvers,
+  ...BookingDateOccupancyResolvers.defaultResolvers
 };

@@ -1,18 +1,18 @@
-import { ActivityResolvers, QueryResolvers } from "../generated/resolvers";
+import { ActivityResolvers, QueryResolvers } from "../codegen/resolvers";
 import { Context } from "../types/Context";
 
-const activities = (parent: any, args: any, { prisma }: Context) =>
+const activities = (parent, args, { prisma }: Context) =>
   prisma.activities({ orderBy: "name_ASC" });
 
 const activity = (
-  parent: any,
+  parent,
   args: QueryResolvers.ArgsActivity,
-  { prisma }: Context,
+  { prisma }: Context
 ) => prisma.activity({ name: args.name });
 
 export const Query = {
   activities,
-  activity,
+  activity
 };
 
 export const Resolvers: ActivityResolvers.Type = {
@@ -20,5 +20,5 @@ export const Resolvers: ActivityResolvers.Type = {
   images: (parent, args, { prisma }) =>
     prisma.activity({ name: parent.name }).images(),
   translations: (parent, args, { prisma }) =>
-    prisma.activity({ name: parent.name }).translations(),
+    prisma.activity({ name: parent.name }).translations()
 };

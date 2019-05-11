@@ -1,4 +1,4 @@
-# import * from "../generated/schema/prisma.graphql"
+# import * from "../codegen/prisma/schema/prisma.graphql"
 
 type Activity {
   name: String!

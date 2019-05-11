@@ -1,14 +1,14 @@
-import { BookingDate, Prisma } from "../generated/client";
-import { BookingDateOccupancy } from "../types/model";
-
 import { curry, find, reduce } from "lodash";
 import { findBookingDatesWithActivity } from "../repositories/bookingDates";
+
+import { BookingDate, Prisma } from "../codegen/prisma/client";
+import { BookingDateOccupancy } from "../types/BookingDateOccupancy";
 
 const addBookingDateOccupancy = curry(
   async (
     prisma: Prisma,
     accPromise: Promise<BookingDateOccupancy[]>,
-    { date, id }: BookingDate,
+    { date, id }: BookingDate
   ): Promise<BookingDateOccupancy[]> => {
     const acc = await accPromise;
 
@@ -27,21 +27,21 @@ const addBookingDateOccupancy = curry(
       {
         activity,
         date,
-        personCount,
-      },
+        personCount
+      }
     ];
-  },
+  }
 );
 
 const calculateBookingDatesOccupancy = async (
   prisma: Prisma,
   fromDate: string,
-  toDate: string,
+  toDate: string
 ): Promise<BookingDateOccupancy[]> =>
   reduce(
     await findBookingDatesWithActivity(prisma, fromDate, toDate),
     addBookingDateOccupancy(prisma),
-    Promise.resolve([]),
+    Promise.resolve([])
   );
 
 export default calculateBookingDatesOccupancy;

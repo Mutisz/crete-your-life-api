@@ -1,4 +1,4 @@
-import { Activity } from "../generated/client";
+import { Activity } from "../codegen/prisma/client";
 
 export interface BookingDateOccupancy {
   date: string;

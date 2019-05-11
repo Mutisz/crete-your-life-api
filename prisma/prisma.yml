@@ -3,9 +3,9 @@ endpoint: ${env:PRISMA_HOST}
 secret: ${env:PRISMA_SECRET}
 generate:
   - generator: typescript-client
-    output: ../src/generated/client
+    output: ../src/codegen/prisma/client
   - generator: graphql-schema
-    output: ../src/generated/schema
+    output: ../src/codegen/prisma/schema/prisma.graphql
 subscriptions:
   bookingCreated:
     query: subscriptions/bookingCreated.graphql
