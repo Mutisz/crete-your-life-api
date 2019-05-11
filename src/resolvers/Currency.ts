@@ -1,7 +1,7 @@
 import { map } from "lodash";
 
 import { CurrencyResolvers } from "../codegen/resolvers";
-import { Context } from "../types/Context";
+import { Context } from "../@types/crete-your-life/Context";
 
 const upsertCurrencyPayload = (rate, code, date) => ({
   create: { code, rate, date },

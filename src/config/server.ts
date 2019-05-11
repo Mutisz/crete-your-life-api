@@ -6,8 +6,8 @@ import createStorageService from "./services/storage";
 
 import resolvers from "../resolvers";
 
-import { Config } from "../types/Config";
-import { Context } from "../types/Context";
+import { Config } from "../@types/crete-your-life/Config";
+import { Context } from "../@types/crete-your-life/Context";
 
 const createContext = (config: Config): Context => ({
   config,

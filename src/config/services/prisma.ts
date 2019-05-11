@@ -1,4 +1,4 @@
-import { Config } from "../../types/Config";
+import { Config } from "../../@types/crete-your-life/Config";
 
 import { Prisma } from "../../codegen/prisma/client";
 

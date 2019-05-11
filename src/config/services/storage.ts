@@ -1,6 +1,6 @@
 import S3 from "aws-sdk/clients/s3";
 
-import { Config } from "../../types/Config";
+import { Config } from "../../@types/crete-your-life/Config";
 
 const createStorageService = ({
   S3_ACCESS_KEY_ID,

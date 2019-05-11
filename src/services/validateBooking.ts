@@ -6,7 +6,7 @@ import calculateBookingDatesOccupancy from "./calculateBookingDatesOccupancy";
 
 import { Prisma } from "../codegen/prisma/client";
 import { MutationResolvers } from "../codegen/resolvers";
-import { BookingDateOccupancy } from "../types/BookingDateOccupancy";
+import { BookingDateOccupancy } from "../@types/crete-your-life/BookingDateOccupancy";
 
 const getFirstAndLastDate = (
   dates: MutationResolvers.BookingDateInput[]

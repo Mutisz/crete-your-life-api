@@ -1,6 +1,6 @@
 import { Image } from "../codegen/prisma/client";
 import { ImageResolvers } from "../codegen/resolvers";
-import { Context } from "../types/Context";
+import { Context } from "../@types/crete-your-life/Context";
 
 const url = (
   { filePath, fileName }: Image,

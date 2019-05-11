@@ -13,7 +13,7 @@ import {
   MutationResolvers,
   QueryResolvers
 } from "../codegen/resolvers";
-import { Context } from "../types/Context";
+import { Context } from "../@types/crete-your-life/Context";
 
 const createBookingDatesPayload = (
   data: MutationResolvers.BookingCreateInput

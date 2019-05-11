@@ -2,7 +2,7 @@ import { curry, find, reduce } from "lodash";
 import { findBookingDatesWithActivity } from "../repositories/bookingDates";
 
 import { BookingDate, Prisma } from "../codegen/prisma/client";
-import { BookingDateOccupancy } from "../types/BookingDateOccupancy";
+import { BookingDateOccupancy } from "../@types/crete-your-life/BookingDateOccupancy";
 
 const addBookingDateOccupancy = curry(
   async (

@@ -2,7 +2,7 @@ import { map } from "lodash";
 import { findLockedDates } from "../repositories/lockedDates";
 
 import { QueryResolvers } from "../codegen/resolvers";
-import { Context } from "../types/Context";
+import { Context } from "../@types/crete-your-life/Context";
 
 const lockedDates = async (
   parent,

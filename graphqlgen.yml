@@ -1,10 +1,10 @@
 language: typescript
 schema: src/schema/app.graphql
-context: src/types/Context.ts:Context
+context: src/@types/crete-your-life/Context.d.ts:Context
 models:
   files:
     - src/codegen/prisma/client/index.ts
-    - src/types/BookingDateOccupancy.ts
+    - src/@types/crete-your-life/BookingDateOccupancy.d.ts
 output: src/codegen/resolvers/index.ts
 resolver-scaffolding:
   output: src/codegen/resolvers/scaffolding/
