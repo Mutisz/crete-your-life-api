@@ -5,7 +5,7 @@ import { map } from "lodash";
 import { findLockedDates } from "../repositories/lockedDates";
 
 const lockedDates = async (
-  _parent,
+  _parent: unknown,
   { fromDate, toDate }: QueryResolvers.ArgsLockedDates,
   { prisma }: Context
 ): Promise<string[]> =>

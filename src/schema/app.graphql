@@ -12,8 +12,8 @@ type Activity {
   earliestStartHour: String
   latestStartHour: String
   durationHours: String
-  translations: [ActivityTranslation]!
-  images: [Image]!
+  translations: [ActivityTranslation!]!
+  images: [Image!]!
 }
 
 type Image {
@@ -30,7 +30,7 @@ type Booking {
   personCount: Int!
   priceTotal: Int!
   preferredLanguage: String!
-  dates: [BookingDate]!
+  dates: [BookingDate!]!
 }
 
 type BookingDateOccupancy {
@@ -41,7 +41,7 @@ type BookingDateOccupancy {
 
 input BookingCalculatePriceInput {
   personCount: Int!
-  dates: [BookingDateInput]!
+  dates: [BookingDateInput!]!
 }
 
 input BookingCreateInput {
@@ -49,7 +49,7 @@ input BookingCreateInput {
   phone: String!
   personCount: Int!
   preferredLanguage: String!
-  dates: [BookingDateInput]!
+  dates: [BookingDateInput!]!
 }
 
 input BookingDateInput {
@@ -58,19 +58,19 @@ input BookingDateInput {
 }
 
 type Query {
-  currencies: [Currency]
-  activities: [Activity]
-  activity(name: String!): Activity
-  bookingPrice(data: BookingCalculatePriceInput): Int
-  booking(number: String!): Booking
+  currencies: [Currency!]!
+  activities: [Activity!]!
+  activity(name: String!): Activity!
+  bookingPrice(data: BookingCalculatePriceInput!): Int!
+  booking(number: String!): Booking!
   bookingDatesOccupancy(
     fromDate: String!
     toDate: String!
-  ): [BookingDateOccupancy]
-  lockedDates(fromDate: String!, toDate: String!): [String]
+  ): [BookingDateOccupancy!]!
+  lockedDates(fromDate: String!, toDate: String!): [String!]!
 }
 
 type Mutation {
-  updateCurrencyRates: [Currency]
-  createBooking(data: BookingCreateInput!): Booking
+  updateCurrencyRates: [Currency!]!
+  createBooking(data: BookingCreateInput!): Booking!
 }

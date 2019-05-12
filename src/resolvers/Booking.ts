@@ -3,7 +3,6 @@ import {
   FragmentableArray,
   BookingDate,
   Booking,
-  BookingNullablePromise,
   BookingCreateInput,
   BookingDateCreateManyWithoutBookingInput,
   BookingDateCreateWithoutBookingInput
@@ -50,8 +49,8 @@ const booking = (
   _parent: unknown,
   args: QueryResolvers.ArgsBooking,
   { prisma }: Context
-): BookingNullablePromise => {
-  return prisma.booking({ number: args.number });
+): Promise<Booking> => {
+  return prisma.booking({ number: args.number }) as Promise<Booking>;
 };
 
 const bookingPrice = (

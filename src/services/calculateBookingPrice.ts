@@ -1,7 +1,19 @@
-import { Prisma } from "../codegen/prisma/client";
+import { Prisma, Activity } from "../codegen/prisma/client";
 import { QueryResolvers } from "../codegen/resolvers";
 
 import { curry, reduce } from "lodash";
+
+const requireActivity = async (
+  prisma: Prisma,
+  name: string
+): Promise<Activity> => {
+  const activity = await prisma.activity({ name });
+  if (activity === null) {
+    throw new Error(`Activity ${name} not found`);
+  }
+
+  return activity;
+};
 
 const calculateBookingPriceForDate = async (
   prisma: Prisma,
@@ -10,7 +22,7 @@ const calculateBookingPriceForDate = async (
 ): Promise<number> => {
   const activityName = date.activity;
   if (activityName !== null) {
-    const activity = await prisma.activity({ name: activityName });
+    const activity = await requireActivity(prisma, activityName as string);
     return personCount * activity.pricePerPerson;
   }
 

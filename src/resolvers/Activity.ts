@@ -1,7 +1,6 @@
 import {
   FragmentableArray,
   Activity,
-  ActivityNullablePromise,
   ActivityTranslation,
   Image
 } from "../codegen/prisma/client";
@@ -18,7 +17,8 @@ const activity = (
   _parent: unknown,
   args: QueryResolvers.ArgsActivity,
   { prisma }: Context
-): ActivityNullablePromise => prisma.activity({ name: args.name });
+): Promise<Activity> =>
+  prisma.activity({ name: args.name }) as Promise<Activity>;
 
 export const Query = {
   activities,

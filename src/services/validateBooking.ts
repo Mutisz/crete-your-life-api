@@ -4,17 +4,19 @@ import { BookingDateOccupancy } from "../@types/crete-your-life/BookingDateOccup
 
 import ValidationError from "../errors/ValidationError";
 
-import { curry, head, last, reduce, sortBy } from "lodash";
+import { curry, head, last, reduce, sortBy, size } from "lodash";
 import { findLockedDates } from "../repositories/lockedDates";
 import calculateBookingDatesOccupancy from "./calculateBookingDatesOccupancy";
 
 const getFirstAndLastDate = (
   dates: MutationResolvers.BookingDateInput[]
-): { firstDate: string; lastDate: string } => {
+): { firstDate: string | null; lastDate: string | null } => {
   const sortedDates = sortBy(dates, "date");
+  const firstDate = head(sortedDates);
+  const lastDate = last(sortedDates);
   return {
-    firstDate: head(sortedDates).date,
-    lastDate: last(sortedDates).date
+    firstDate: firstDate ? firstDate.date : null,
+    lastDate: lastDate ? lastDate.date : null
   };
 };
 
@@ -23,7 +25,10 @@ const validateBookingDatesLock = async (
   { dates }: MutationResolvers.BookingCreateInput
 ): Promise<void> => {
   const { firstDate, lastDate } = getFirstAndLastDate(dates);
-  const lockedDates = await findLockedDates(prisma, firstDate, lastDate);
+  const lockedDates =
+    firstDate && lastDate
+      ? await findLockedDates(prisma, firstDate, lastDate)
+      : [];
   if (lockedDates.length > 0) {
     throw new ValidationError("bookingDatesLocked");
   }
@@ -53,11 +58,10 @@ const validateBookingDatesOccupancy = async (
   { dates, personCount }: MutationResolvers.BookingCreateInput
 ): Promise<void> => {
   const { firstDate, lastDate } = getFirstAndLastDate(dates);
-  const bookingDatesOccupancy = await calculateBookingDatesOccupancy(
-    prisma,
-    firstDate,
-    lastDate
-  );
+  const bookingDatesOccupancy =
+    firstDate && lastDate
+      ? await calculateBookingDatesOccupancy(prisma, firstDate, lastDate)
+      : [];
 
   const invalidDates = reduce(
     bookingDatesOccupancy,
