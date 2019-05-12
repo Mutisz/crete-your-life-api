@@ -1,3 +1,4 @@
+import Fixer, { RatesResponse } from "fixer-node";
 import { CurrencyResolvers } from "../codegen/resolvers";
 import {
   FragmentableArray,
@@ -8,13 +9,9 @@ import { Context } from "../@types/crete-your-life/Context";
 
 import { map } from "lodash";
 
-const fetchLatestCurrencyRates = async currency => await currency.latest();
-
-const getUpsertCurrencyPayload = (rate, code, date) => ({
-  create: { code, rate, date },
-  update: { rate, date },
-  where: { code }
-});
+const fetchLatestCurrencyRates = async (
+  currency: Fixer
+): Promise<RatesResponse> => await currency.latest();
 
 const currencies = (
   _parent: unknown,
@@ -32,7 +29,11 @@ const updateCurrencyRates = async (
     map(
       rates,
       (rate, code): CurrencyPromise =>
-        prisma.upsertCurrency(getUpsertCurrencyPayload(rate, code, date))
+        prisma.upsertCurrency({
+          create: { code, rate, date },
+          update: { rate, date },
+          where: { code }
+        })
     )
   );
 };
