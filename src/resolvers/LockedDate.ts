@@ -1,14 +1,18 @@
-import { map } from "lodash";
-import { findLockedDates } from "../repositories/lockedDates";
-
 import { QueryResolvers } from "../codegen/resolvers";
 import { Context } from "../@types/crete-your-life/Context";
 
+import { map } from "lodash";
+import { findLockedDates } from "../repositories/lockedDates";
+
 const lockedDates = async (
-  parent,
+  _parent,
   { fromDate, toDate }: QueryResolvers.ArgsLockedDates,
   { prisma }: Context
-) => map(await findLockedDates(prisma, fromDate, toDate), date => date.date);
+): Promise<string[]> =>
+  map(
+    await findLockedDates(prisma, fromDate, toDate),
+    (date): string => date.date
+  );
 
 export const Query = {
   lockedDates

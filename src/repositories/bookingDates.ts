@@ -1,10 +1,14 @@
-import { Prisma } from "../codegen/prisma/client";
+import {
+  Prisma,
+  FragmentableArray,
+  BookingDate
+} from "../codegen/prisma/client";
 
 export const findBookingDatesWithActivity = (
   prisma: Prisma,
   fromDate: string,
   toDate: string
-) =>
+): FragmentableArray<BookingDate> =>
   prisma.bookingDates({
     orderBy: "date_ASC",
     where: {

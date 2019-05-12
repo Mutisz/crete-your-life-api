@@ -1,13 +1,13 @@
-import { curry, reduce } from "lodash";
-
 import { Prisma } from "../codegen/prisma/client";
 import { QueryResolvers } from "../codegen/resolvers";
+
+import { curry, reduce } from "lodash";
 
 const calculateBookingPriceForDate = async (
   prisma: Prisma,
   personCount: number,
   date: QueryResolvers.BookingDateInput
-) => {
+): Promise<number> => {
   const activityName = date.activity;
   if (activityName !== null) {
     const activity = await prisma.activity({ name: activityName });
@@ -23,7 +23,7 @@ const addBookingPriceForDate = curry(
     personCount: number,
     accPromise: Promise<number>,
     date: QueryResolvers.BookingDateInput
-  ) => {
+  ): Promise<number> => {
     const priceForDate = await calculateBookingPriceForDate(
       prisma,
       personCount,
@@ -38,7 +38,7 @@ const calculateBookingPrice = async (
   prisma: Prisma,
   personCount: number,
   dates: QueryResolvers.BookingDateInput[]
-) =>
+): Promise<number> =>
   reduce(
     dates,
     addBookingPriceForDate(prisma, personCount),

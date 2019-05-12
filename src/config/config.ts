@@ -1,6 +1,6 @@
-import { get } from "lodash";
-
 import { Config } from "../@types/crete-your-life/Config";
+
+import { get } from "lodash";
 
 const requireConfigValue = (variable: string): string => {
   const value = get(process.env, variable, null);

@@ -1,3 +1,6 @@
+import { IResolvers } from "graphql-tools";
+import { Resolvers } from "../codegen/resolvers";
+
 import { Resolvers as ActivityResolvers } from "./Activity";
 import { Resolvers as ActivityTranslationResolvers } from "./ActivityTranslation";
 import { Resolvers as BookingResolvers } from "./Booking";
@@ -9,9 +12,7 @@ import { Resolvers as ImageResolvers } from "./Image";
 import { Mutation } from "./Mutation";
 import { Query } from "./Query";
 
-import { Resolvers } from "../codegen/resolvers";
-
-const resolvers: Resolvers = {
+const resolvers: Resolvers | IResolvers = {
   Activity: ActivityResolvers,
   ActivityTranslation: ActivityTranslationResolvers,
   Booking: BookingResolvers,

@@ -1,28 +1,38 @@
-import { map } from "lodash";
-
 import { CurrencyResolvers } from "../codegen/resolvers";
+import {
+  FragmentableArray,
+  Currency,
+  CurrencyPromise
+} from "../codegen/prisma/client";
 import { Context } from "../@types/crete-your-life/Context";
 
-const upsertCurrencyPayload = (rate, code, date) => ({
+import { map } from "lodash";
+
+const fetchLatestCurrencyRates = async currency => await currency.latest();
+
+const getUpsertCurrencyPayload = (rate, code, date) => ({
   create: { code, rate, date },
   update: { rate, date },
   where: { code }
 });
 
-const getLatestCurrencyRates = async currency => await currency.latest();
-
-const currencies = (parent: any, args: any, { prisma }: Context) =>
-  prisma.currencies({ orderBy: "code_ASC" });
+const currencies = (
+  _parent: unknown,
+  _args: unknown,
+  { prisma }: Context
+): FragmentableArray<Currency> => prisma.currencies({ orderBy: "code_ASC" });
 
 const updateCurrencyRates = async (
-  parent: any,
-  args: any,
+  _parent: unknown,
+  _args: unknown,
   { prisma, currency }: Context
-) => {
-  const { date, rates } = await getLatestCurrencyRates(currency);
+): Promise<Currency[]> => {
+  const { date, rates } = await fetchLatestCurrencyRates(currency);
   return Promise.all(
-    map(rates, (rate, code) =>
-      prisma.upsertCurrency(upsertCurrencyPayload(rate, code, date))
+    map(
+      rates,
+      (rate, code): CurrencyPromise =>
+        prisma.upsertCurrency(getUpsertCurrencyPayload(rate, code, date))
     )
   );
 };

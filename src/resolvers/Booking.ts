@@ -1,12 +1,12 @@
-import { map } from "lodash";
-import shortid from "shortid";
-
-import calculateBookingPrice from "../services/calculateBookingPrice";
-import validateBooking from "../services/validateBooking";
-
 import {
-  BookingCreateInput as PrismaBookingCreateInput,
-  Prisma
+  Prisma,
+  FragmentableArray,
+  BookingDate,
+  Booking,
+  BookingNullablePromise,
+  BookingCreateInput,
+  BookingDateCreateManyWithoutBookingInput,
+  BookingDateCreateWithoutBookingInput
 } from "../codegen/prisma/client";
 import {
   BookingResolvers,
@@ -15,50 +15,61 @@ import {
 } from "../codegen/resolvers";
 import { Context } from "../@types/crete-your-life/Context";
 
-const createBookingDatesPayload = (
-  data: MutationResolvers.BookingCreateInput
-) => ({
-  create: map(data.dates, bookingDate => ({
-    activity: bookingDate.activity
-      ? { connect: { name: bookingDate.activity } }
-      : null,
-    date: bookingDate.date
-  }))
+import { map } from "lodash";
+import shortid from "shortid";
+
+import calculateBookingPrice from "../services/calculateBookingPrice";
+import validateBooking from "../services/validateBooking";
+
+const getCreateBookingDatePayload = (
+  bookingDate: MutationResolvers.BookingDateInput
+): BookingDateCreateWithoutBookingInput => ({
+  activity: bookingDate.activity
+    ? { connect: { name: bookingDate.activity } }
+    : null,
+  date: bookingDate.date
 });
 
-const createBookingPayload = async (
+const getCreateBookingDatesPayload = (
+  data: MutationResolvers.BookingCreateInput
+): BookingDateCreateManyWithoutBookingInput => ({
+  create: map(data.dates, getCreateBookingDatePayload)
+});
+
+const getCreateBookingPayload = async (
   prisma: Prisma,
   data: MutationResolvers.BookingCreateInput
-): Promise<PrismaBookingCreateInput> => ({
+): Promise<BookingCreateInput> => ({
   ...data,
-  dates: createBookingDatesPayload(data),
+  dates: getCreateBookingDatesPayload(data),
   number: shortid.generate(),
   priceTotal: await calculateBookingPrice(prisma, data.personCount, data.dates)
 });
 
 const booking = (
-  parent: any,
+  _parent: unknown,
   args: QueryResolvers.ArgsBooking,
   { prisma }: Context
-) => {
+): BookingNullablePromise => {
   return prisma.booking({ number: args.number });
 };
 
 const bookingPrice = (
-  parent: any,
+  _parent: unknown,
   args: QueryResolvers.ArgsBookingPrice,
   { prisma }: Context
-) => calculateBookingPrice(prisma, args.data.personCount, args.data.dates);
+): Promise<number> =>
+  calculateBookingPrice(prisma, args.data.personCount, args.data.dates);
 
 const createBooking = async (
-  parent: any,
+  _parent: unknown,
   args: MutationResolvers.ArgsCreateBooking,
   { prisma }: Context
-) => {
+): Promise<Booking> => {
   const { data } = args;
 
   await validateBooking(prisma, data);
-  const payload = await createBookingPayload(prisma, data);
+  const payload = await getCreateBookingPayload(prisma, data);
 
   return prisma.createBooking(payload);
 };
@@ -74,6 +85,6 @@ export const Mutation = {
 
 export const Resolvers: BookingResolvers.Type = {
   ...BookingResolvers.defaultResolvers,
-  dates: (parent, args, { prisma }) =>
+  dates: (parent, _args, { prisma }): FragmentableArray<BookingDate> =>
     prisma.booking({ number: parent.number }).dates()
 };

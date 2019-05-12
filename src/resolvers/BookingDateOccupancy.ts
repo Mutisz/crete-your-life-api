@@ -1,16 +1,18 @@
-import calculateBookingDatesOccupancy from "../services/calculateBookingDatesOccupancy";
-
 import {
   BookingDateOccupancyResolvers,
   QueryResolvers
 } from "../codegen/resolvers";
 import { Context } from "../@types/crete-your-life/Context";
+import { BookingDateOccupancy } from "../@types/crete-your-life/BookingDateOccupancy";
+
+import calculateBookingDatesOccupancy from "../services/calculateBookingDatesOccupancy";
 
 const bookingDatesOccupancy = (
-  parent: any,
+  _parent: unknown,
   { fromDate, toDate }: QueryResolvers.ArgsBookingDatesOccupancy,
   { prisma }: Context
-) => calculateBookingDatesOccupancy(prisma, fromDate, toDate);
+): Promise<BookingDateOccupancy[]> =>
+  calculateBookingDatesOccupancy(prisma, fromDate, toDate);
 
 export const Query = {
   bookingDatesOccupancy

@@ -1,0 +1,10 @@
+projects:
+  crete-your-life:
+    schemaPath: src/schema/app.graphql
+    extensions:
+      endpoints:
+        default: ${env:API_HOST}
+  prisma:
+    schemaPath: src/generated/schema/prisma.graphql
+    extensions:
+      prisma: prisma/prisma.yml

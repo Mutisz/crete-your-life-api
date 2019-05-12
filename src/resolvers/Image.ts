@@ -4,9 +4,9 @@ import { Context } from "../@types/crete-your-life/Context";
 
 const url = (
   { filePath, fileName }: Image,
-  args: any,
+  _args: unknown,
   { storage, config }: Context
-) => {
+): string => {
   if (!filePath || !fileName) {
     throw new Error("Both file path and name are required");
   }
