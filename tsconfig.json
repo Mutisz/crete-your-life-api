@@ -2,6 +2,7 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist/src",
+    "typeRoots": ["src/@types/modules"],
     "target": "es6",
     "lib": ["esnext", "dom"],
     "module": "commonjs",

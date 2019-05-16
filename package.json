@@ -33,11 +33,8 @@
     "dotenv": "^8.0.0",
     "fixer-node": "^2.0.0",
     "graphql": "^14.3.0",
-    "graphql-tag": "^2.10.1",
-    "graphql-tools": "^4.0.4",
     "graphql-yoga": "^1.17.4",
     "http-errors": "^1.7.2",
-    "prisma-binding": "^2.3.10",
     "prisma-client-lib": "^1.30.4",
     "shortid": "^2.2.14"
   },
