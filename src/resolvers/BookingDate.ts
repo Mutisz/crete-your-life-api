@@ -3,8 +3,8 @@ import { BookingDateResolvers } from "../codegen/resolvers";
 
 export const Resolvers: BookingDateResolvers.Type = {
   ...BookingDateResolvers.defaultResolvers,
-  activity: ({ id }, _args, { prisma }): ActivityPromise =>
-    prisma.bookingDate({ id }).activity(),
-  booking: ({ id }, _args, { prisma }): BookingPromise =>
-    prisma.bookingDate({ id }).booking()
+  activity: ({ bookingDateId }, _args, { prisma }): ActivityPromise =>
+    prisma.bookingDate({ bookingDateId }).activity(),
+  booking: ({ bookingDateId }, _args, { prisma }): BookingPromise =>
+    prisma.bookingDate({ bookingDateId }).booking()
 };

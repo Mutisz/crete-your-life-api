@@ -18,9 +18,8 @@ const requireActivity = async (
 const calculateBookingPriceForDate = async (
   prisma: Prisma,
   personCount: number,
-  date: QueryResolvers.BookingDateInput
+  { activityName }: QueryResolvers.BookingDateInput
 ): Promise<number> => {
-  const activityName = date.activity;
   if (activityName !== null) {
     const activity = await requireActivity(prisma, activityName as string);
     return personCount * activity.pricePerPerson;

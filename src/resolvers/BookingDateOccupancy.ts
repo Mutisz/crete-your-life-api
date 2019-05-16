@@ -9,10 +9,10 @@ import calculateBookingDatesOccupancy from "../services/calculateBookingDatesOcc
 
 const bookingDatesOccupancy = (
   _parent: unknown,
-  { fromDate, toDate }: QueryResolvers.ArgsBookingDatesOccupancy,
+  { interval: { start, end } }: QueryResolvers.ArgsBookingDatesOccupancy,
   { prisma }: Context
 ): Promise<BookingDateOccupancy[]> =>
-  calculateBookingDatesOccupancy(prisma, fromDate, toDate);
+  calculateBookingDatesOccupancy(prisma, start, end);
 
 export const Query = {
   bookingDatesOccupancy

@@ -2,6 +2,8 @@ import {
   FragmentableArray,
   Activity,
   ActivityTranslation,
+  ActivityCategory,
+  ActivityLockedDateInterval,
   Image
 } from "../codegen/prisma/client";
 import { ActivityResolvers, QueryResolvers } from "../codegen/resolvers";
@@ -27,12 +29,20 @@ export const Query = {
 
 export const Resolvers: ActivityResolvers.Type = {
   ...ActivityResolvers.defaultResolvers,
-  images: ({ name }, _args, { prisma }): FragmentableArray<Image> =>
-    prisma.activity({ name }).images(),
+  category: ({ activityId }, _args, { prisma }): ActivityCategory =>
+    prisma.activity({ activityId }).category(),
   translations: (
-    { name },
+    { activityId },
     _args,
     { prisma }
   ): FragmentableArray<ActivityTranslation> =>
-    prisma.activity({ name }).translations()
+    prisma.activity({ activityId }).translations(),
+  lockedDateIntervals: (
+    { activityId },
+    _args,
+    { prisma }
+  ): FragmentableArray<ActivityLockedDateInterval> =>
+    prisma.activity({ activityId }).lockedDateIntervals(),
+  images: ({ activityId }, _args, { prisma }): FragmentableArray<Image> =>
+    prisma.activity({ activityId }).images()
 };

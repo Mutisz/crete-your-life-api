@@ -1,29 +1,63 @@
+enum Language {
+  PL
+}
+
+enum ActivityDifficulty {
+  EASY
+  MODERATE
+  CHALLENGING
+}
+
 type Activity {
+  activityId: ID! @id
   name: String! @unique
   shortDescription: String!
   description: String!
   pricePerPerson: Int!
   minPersonCount: Int!
   maxPersonCount: Int!
-  category: String!
-  difficulty: String!
-  earliestStartHour: String
-  latestStartHour: String
-  durationHours: String
+  startHour: String!
+  durationHours: String!
+  difficulty: ActivityDifficulty!
+  category: ActivityCategory!
   translations: [ActivityTranslation!]!
+  lockedDateIntervals: [ActivityLockedDateInterval!]!
   images: [Image!]!
 }
 
 type ActivityTranslation {
+  activityTranslationId: ID! @id
+  activity: Activity!
+  language: Language!
   name: String! @unique
-  language: String!
   shortDescription: String!
   description: String!
+}
+
+type ActivityLockedDateInterval {
+  activityLockedDateIntervalId: ID! @id
   activity: Activity!
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+type ActivityCategory {
+  activityCategoryId: ID! @id
+  name: String! @unique
+  description: String
+  translations: [ActivityCategoryTranslation!]!
+}
+
+type ActivityCategoryTranslation {
+  activityCategoryTranslationId: ID! @id
+  activityCategory: ActivityCategory!
+  language: Language!
+  name: String! @unique
+  description: String!
 }
 
 type Image {
-  id: ID! @unique
+  imageId: ID! @id
   isThumbnail: Boolean!
   filePath: String!
   fileName: String!
@@ -31,29 +65,32 @@ type Image {
 }
 
 type Booking {
+  bookingId: ID! @id
   number: String! @unique
   email: String!
   phone: String!
   personCount: Int!
   priceTotal: Int!
-  preferredLanguage: String!
+  preferredLanguage: Language!
   dates: [BookingDate!]!
 }
 
 type BookingDate {
-  id: ID! @unique
+  bookingDateId: ID! @id
   booking: Booking!
-  date: String!
+  date: DateTime!
   activity: Activity
 }
 
-type LockedDate {
-  id: ID! @unique
-  date: String!
+type GlobalLockedDateRange {
+  globalLockedDateRangeId: ID! @id
+  startDate: DateTime!
+  endDate: DateTime!
 }
 
 type Currency {
+  currencyId: ID! @id
   code: String! @unique
   rate: Float!
-  date: String!
+  date: DateTime!
 }

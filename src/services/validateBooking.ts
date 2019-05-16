@@ -4,14 +4,14 @@ import { BookingDateOccupancy } from "../@types/crete-your-life/BookingDateOccup
 
 import ValidationError from "../errors/ValidationError";
 
-import { curry, head, last, reduce, sortBy, size } from "lodash";
-import { findLockedDates } from "../repositories/lockedDates";
+import { curry, head, last, reduce, sortBy } from "lodash";
+import { findGlobalLockedDateRanges } from "../repositories/lockedDateIntervalRepository";
 import calculateBookingDatesOccupancy from "./calculateBookingDatesOccupancy";
 
 const getFirstAndLastDate = (
-  dates: MutationResolvers.BookingDateInput[]
+  bookingDates: MutationResolvers.BookingDateInput[]
 ): { firstDate: string | null; lastDate: string | null } => {
-  const sortedDates = sortBy(dates, "date");
+  const sortedDates = sortBy(bookingDates, "date");
   const firstDate = head(sortedDates);
   const lastDate = last(sortedDates);
   return {
@@ -22,12 +22,12 @@ const getFirstAndLastDate = (
 
 const validateBookingDatesLock = async (
   prisma: Prisma,
-  { dates }: MutationResolvers.BookingCreateInput
+  { bookingDates }: MutationResolvers.BookingCreateInput
 ): Promise<void> => {
-  const { firstDate, lastDate } = getFirstAndLastDate(dates);
+  const { firstDate, lastDate } = getFirstAndLastDate(bookingDates);
   const lockedDates =
     firstDate && lastDate
-      ? await findLockedDates(prisma, firstDate, lastDate)
+      ? await findGlobalLockedDateRanges(prisma, firstDate, lastDate)
       : [];
   if (lockedDates.length > 0) {
     throw new ValidationError("bookingDatesLocked");
@@ -55,9 +55,9 @@ const addBookingDateOccupancyValidation = curry(
 
 const validateBookingDatesOccupancy = async (
   prisma: Prisma,
-  { dates, personCount }: MutationResolvers.BookingCreateInput
+  { bookingDates, personCount }: MutationResolvers.BookingCreateInput
 ): Promise<void> => {
-  const { firstDate, lastDate } = getFirstAndLastDate(dates);
+  const { firstDate, lastDate } = getFirstAndLastDate(bookingDates);
   const bookingDatesOccupancy =
     firstDate && lastDate
       ? await calculateBookingDatesOccupancy(prisma, firstDate, lastDate)
@@ -75,9 +75,9 @@ const validateBookingDatesOccupancy = async (
 };
 
 const validateBookingHasDates = ({
-  dates
+  bookingDates
 }: MutationResolvers.BookingCreateInput): void => {
-  const hasDates = dates.length > 0;
+  const hasDates = bookingDates.length > 0;
   if (!hasDates) {
     throw new ValidationError("bookingDatesEmpty");
   }

@@ -8,12 +8,12 @@ const addBookingDateOccupancy = curry(
   async (
     prisma: Prisma,
     accPromise: Promise<BookingDateOccupancy[]>,
-    { date, id }: BookingDate
+    { bookingDateId, date }: BookingDate
   ): Promise<BookingDateOccupancy[]> => {
     const acc = await accPromise;
 
-    const booking = await prisma.bookingDate({ id }).booking();
-    const activity = await prisma.bookingDate({ id }).activity();
+    const booking = await prisma.bookingDate({ bookingDateId }).booking();
+    const activity = await prisma.bookingDate({ bookingDateId }).activity();
 
     const { personCount } = booking;
     const existingOccupancy = find(acc, { date, activity });
@@ -35,11 +35,11 @@ const addBookingDateOccupancy = curry(
 
 const calculateBookingDatesOccupancy = async (
   prisma: Prisma,
-  fromDate: string,
-  toDate: string
+  startDate: string,
+  endDate: string
 ): Promise<BookingDateOccupancy[]> =>
   reduce(
-    await findBookingDatesWithActivity(prisma, fromDate, toDate),
+    await findBookingDatesWithActivity(prisma, startDate, endDate),
     addBookingDateOccupancy(prisma),
     Promise.resolve([])
   );

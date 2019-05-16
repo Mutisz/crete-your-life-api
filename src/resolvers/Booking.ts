@@ -23,8 +23,8 @@ import validateBooking from "../services/validateBooking";
 const getCreateBookingDatePayload = (
   bookingDate: MutationResolvers.BookingDateInput
 ): BookingDateCreateWithoutBookingInput => ({
-  activity: bookingDate.activity
-    ? { connect: { name: bookingDate.activity } }
+  activity: bookingDate.activityName
+    ? { connect: { name: bookingDate.activityName } }
     : null,
   date: bookingDate.date
 });
@@ -32,7 +32,7 @@ const getCreateBookingDatePayload = (
 const getCreateBookingDatesPayload = (
   data: MutationResolvers.BookingCreateInput
 ): BookingDateCreateManyWithoutBookingInput => ({
-  create: map(data.dates, getCreateBookingDatePayload)
+  create: map(data.bookingDates, getCreateBookingDatePayload)
 });
 
 const getCreateBookingPayload = async (
@@ -42,23 +42,26 @@ const getCreateBookingPayload = async (
   ...data,
   dates: getCreateBookingDatesPayload(data),
   number: shortid.generate(),
-  priceTotal: await calculateBookingPrice(prisma, data.personCount, data.dates)
+  priceTotal: await calculateBookingPrice(
+    prisma,
+    data.personCount,
+    data.bookingDates
+  )
 });
 
 const booking = (
   _parent: unknown,
-  args: QueryResolvers.ArgsBooking,
+  { number }: QueryResolvers.ArgsBooking,
   { prisma }: Context
 ): Promise<Booking> => {
-  return prisma.booking({ number: args.number }) as Promise<Booking>;
+  return prisma.booking({ number }) as Promise<Booking>;
 };
 
 const bookingPrice = (
   _parent: unknown,
-  args: QueryResolvers.ArgsBookingPrice,
+  { data: { personCount, bookingDates } }: QueryResolvers.ArgsBookingPrice,
   { prisma }: Context
-): Promise<number> =>
-  calculateBookingPrice(prisma, args.data.personCount, args.data.dates);
+): Promise<number> => calculateBookingPrice(prisma, personCount, bookingDates);
 
 const createBooking = async (
   _parent: unknown,
@@ -84,6 +87,6 @@ export const Mutation = {
 
 export const Resolvers: BookingResolvers.Type = {
   ...BookingResolvers.defaultResolvers,
-  dates: (parent, _args, { prisma }): FragmentableArray<BookingDate> =>
-    prisma.booking({ number: parent.number }).dates()
+  dates: ({ number }, _args, { prisma }): FragmentableArray<BookingDate> =>
+    prisma.booking({ number }).dates()
 };

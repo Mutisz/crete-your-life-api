@@ -11,8 +11,5 @@ subscriptions:
     query: subscriptions/bookingCreated.graphql
     webhook:
       url: ${env:HANDLER_BOOKING_CREATED}
-seed:
-  import: seed/seed.graphql
-hooks:
-  post-deploy:
-    - prisma generate
+# seed:
+#   import: seed/seed.graphql

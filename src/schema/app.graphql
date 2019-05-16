@@ -1,21 +1,5 @@
 # import * from "../codegen/prisma/schema/prisma.graphql"
 
-type Activity {
-  name: String!
-  shortDescription: String!
-  description: String!
-  pricePerPerson: Int!
-  minPersonCount: Int!
-  maxPersonCount: Int!
-  category: String!
-  difficulty: String!
-  earliestStartHour: String
-  latestStartHour: String
-  durationHours: String
-  translations: [ActivityTranslation!]!
-  images: [Image!]!
-}
-
 type Image {
   isThumbnail: Boolean!
   filePath: String!
@@ -23,38 +7,33 @@ type Image {
   url: String
 }
 
-type Booking {
-  number: String!
-  email: String!
-  phone: String!
-  personCount: Int!
-  priceTotal: Int!
-  preferredLanguage: String!
-  dates: [BookingDate!]!
-}
-
 type BookingDateOccupancy {
-  date: String!
-  activity: Activity
+  date: DateTime!
   personCount: Int!
+  activity: Activity
 }
 
 input BookingCalculatePriceInput {
   personCount: Int!
-  dates: [BookingDateInput!]!
+  bookingDates: [BookingDateInput!]!
 }
 
 input BookingCreateInput {
   email: String!
   phone: String!
   personCount: Int!
-  preferredLanguage: String!
-  dates: [BookingDateInput!]!
+  preferredLanguage: Language!
+  bookingDates: [BookingDateInput!]!
 }
 
 input BookingDateInput {
-  date: String!
-  activity: String
+  date: DateTime!
+  activityName: String
+}
+
+input DateIntervalInput {
+  start: DateTime!
+  end: DateTime!
 }
 
 type Query {
@@ -63,11 +42,8 @@ type Query {
   activity(name: String!): Activity!
   bookingPrice(data: BookingCalculatePriceInput!): Int!
   booking(number: String!): Booking!
-  bookingDatesOccupancy(
-    fromDate: String!
-    toDate: String!
-  ): [BookingDateOccupancy!]!
-  lockedDates(fromDate: String!, toDate: String!): [String!]!
+  bookingDatesOccupancy(interval: DateIntervalInput!): [BookingDateOccupancy!]!
+  globalLockedDates(interval: DateIntervalInput!): [String!]!
 }
 
 type Mutation {
