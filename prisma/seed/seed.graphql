@@ -1,182 +1,23 @@
 mutation {
-  aradena: createActivity(
+  wildBeachesOfSouthernCrete: createActivity(
     data: {
-      name: "Aradena"
-      shortDescription: "Unfeeling so rapturous discovery he exquisite."
-      description: "Unfeeling so rapturous discovery he exquisite. Reasonably so middletons or impression by terminated. Old pleasure required removing elegance him had. Down she bore sing saw calm high. Of an or game gate west face shed. no great but music too old found arose. Improved own provided blessing may peculiar domestic. Sight house has sex never. No visited raising gravity outward subject my cottage mr be. Hold do at tore in park feet near my case. Invitation at understood occasional sentiments insipidity inhabiting in. Off melancholy alteration principles old. Is do speedily kindness properly oh. Respect article painted cottage he is offices parlors."
+      name: "Wild Beaches of Southern Crete"
+      shortDescription: ""
+      description: ""
       pricePerPerson: 6000
-      minPersonCount: 2
-      maxPersonCount: 4
-      category: "trekking"
-      difficulty: "hard"
-      earliestStartHour: "06:00"
-      latestStartHour: "10:00"
-      durationHours: "06:00"
+      minPersonCount: 1
+      maxPersonCount: 10
+      startHour: "11:00"
+      durationHours: "05:00"
+      difficulty: MODERATE
+      category: { connect: { name: "Active Relax" } }
       translations: {
         create: [
           {
-            language: "pl"
-            name: "Aradena"
-            shortDescription: "UNiźli Dunaju niepowiedziała kiedym szkody ciemnozieloném Rzekł szedł spokojniejszych Bezładnością skroń."
-            description: "Niźli Dunaju niepowiedziała kiedym szkody ciemnozieloném Rzekł szedł spokojniejszych Bezładnością skroń. Bór izby dnia oczu rogi Nilu niezdradzić angielskiéj tylu złotogłów nowo. Marszałkowską alkowy Przysiągłbyś Wojski sprawa blachy dowoli ciemnozieloném Dojeżdżaczowi niepowiedziała twarze. Trąby młody pomrok gazety. Byłem ogrodu Przedstawiając sejmik Przysiągłbyś Dojeżdżaczowi Worończańskim wojsku bezprzykładną murach żwawo mylił osobna. Zwrócona Chart Latem Łowczego Szmer więdliny pajęczą wzdychać śmietana Musim koło."
-          }
-        ]
-      }
-      images: {
-        create: [
-          {
-            isThumbnail: true
-            filePath: "activities/sample"
-            fileName: "sample_1.png"
-          }
-          {
-            isThumbnail: false
-            filePath: "activities/sample"
-            fileName: "sample_2.png"
-          }
-        ]
-      }
-    }
-  ) {
-    name
-  }
-  samaria: createActivity(
-    data: {
-      name: "Samaria"
-      shortDescription: "Up unpacked friendly ecstatic so possible humoured do."
-      description: "Up unpacked friendly ecstatic so possible humoured do. Ample end might folly quiet one set spoke her. We no am former valley assure. Four need spot ye said we find mile. Are commanded him convinced dashwoods did estimable forfeited. Shy celebrated met sentiments she reasonably but. Proposal its disposed eat advanced marriage sociable. Drawings led greatest add subjects endeavor gay remember. Principles one yet assistance you met impossible. "
-      pricePerPerson: 10000
-      minPersonCount: 2
-      maxPersonCount: 4
-      category: "trekking"
-      difficulty: "medium"
-      earliestStartHour: "06:00"
-      latestStartHour: "10:00"
-      durationHours: "06:00"
-      translations: {
-        create: [
-          {
-            language: "pl"
-            name: "Samaria"
-            shortDescription: "Miedzy Zazdroszczono Ściągnęły domowe zapasy placka smycze zapowiedział."
-            description: "Miedzy Zazdroszczono Ściągnęły domowe zapasy placka smycze zapowiedział. Niezwyczajnéj wkoło wierne Upiera rzeźbiarstwie szczęśliwsza Siedzi prapradziadów gospodarskiéj ogonem cierpi. Dole błyszczała tuż plan nięprzybył kaznodzieją woń mimo jaki rury oświadczyli Dać. Białopiotrowiczem gronie rzekł ubrana zboża. Sploty końca niedostrzegł szpary drugą zagnieździł Wykrzykników przestraszeni Napełniając zboża konstytuować nowiny potraw wiarę. Sądem pokoju żmija Bernardyńskie rostrzygnienie komnat ubóstwiałbym francuszczyzny napój tęczy gospodarskiéj. Rozsądzali albo toż kołnierzyk Tace lada moja wieczornego wcześniéj zagłuszył sił. Polować sobą sądy dzika prawo taką innem zamek wtenczas każdego wybor. Sobie wysokiéj rodzicach dwókolna dziad dołu nadtrąci Twarz ogary płatnych Orzących orzę miły. "
-          }
-        ]
-      }
-      images: {
-        create: [
-          {
-            isThumbnail: true
-            filePath: "activities/sample"
-            fileName: "sample_3.png"
-          }
-        ]
-      }
-    }
-  ) {
-    name
-  }
-  lissos: createActivity(
-    data: {
-      name: "Lissos"
-      shortDescription: "Terminated principles sentiments of no pianoforte if projection impossible."
-      description: "Unfeeling so rapturous discovery he exquisite. Reasonably so middletons or impression by terminated. Old pleasure required removing elegance him had. Down she bore sing saw calm high. Of an or game gate west face shed. no great but music too old found arose. Improved own provided blessing may peculiar domestic. Sight house has sex never. No visited raising gravity outward subject my cottage mr be. Hold do at tore in park feet near my case. Invitation at understood occasional sentiments insipidity inhabiting in. Off melancholy alteration principles old. Is do speedily kindness properly oh. Respect article painted cottage he is offices parlors."
-      pricePerPerson: 4000
-      minPersonCount: 2
-      maxPersonCount: 4
-      category: "leisure"
-      difficulty: "easy"
-      earliestStartHour: "08:00"
-      latestStartHour: "14:00"
-      durationHours: "04:00"
-      translations: {
-        create: [
-          {
-            language: "pl"
-            name: "Lissos"
-            shortDescription: "Przysłowia lica much Grom nieproszony ptak przysłowie przeprosić Jego."
-            description: "Przysłowia lica much Grom nieproszony ptak przysłowie przeprosić Jego. Dowoli barbarzyństwa wpółgłośne szczególniéj wstydu Rzeczpospolita słowa cierpi. Modnisiów kartą żabki Wyezha wytuza zając zwierzynę miała innych przynoszą. Blask celem owiec cały niéj cudza Białopiotrowiczowi. Mąż żołniersczyzny nierostrzygniony téż Wiwat ludem łani najpiękniejszym Kopę Kościuszkowskie Niesiołowskiemu Sień ciąg. Wzrokiem wielu obaczył obracał Zaraz dołu silni Runie kraty wjechał czém swoim."
-          }
-        ]
-      }
-      images: {
-        create: [
-          {
-            isThumbnail: true
-            filePath: "activities/sample"
-            fileName: "sample_4.png"
-          }
-        ]
-      }
-    }
-  ) {
-    name
-  }
-  phaistos: createActivity(
-    data: {
-      name: "Phaistos"
-      shortDescription: "Sitting mistake towards his few country ask."
-      description: "Sitting mistake towards his few country ask. You delighted two rapturous six depending objection happiness something the. Off nay impossible dispatched partiality unaffected. Norland adapted put ham cordial. Ladies talked may shy basket narrow see. Him she distrusts questions sportsmen. Tolerably pretended neglected on my earnestly by. Sex scale sir style truth ought. "
-      pricePerPerson: 12000
-      minPersonCount: 2
-      maxPersonCount: 4
-      category: "history"
-      difficulty: "easy"
-      earliestStartHour: "08:00"
-      latestStartHour: "14:00"
-      durationHours: "04:00"
-      translations: {
-        create: [
-          {
-            language: "pl"
-            name: "Fajstos"
-            shortDescription: "Obfita Lombardskiém lamusa książeczkę przestraszeni niepochwalał muchę kielni przysunąwszy papier. "
-            description: "Obfita Lombardskiém lamusa książeczkę przestraszeni niepochwalał muchę kielni przysunąwszy papier. Nędzy kogoś tybyś wachlarz niemało urzędem kawałka kończą stryja. Obok pode strzelców mami sami rany moki dwólicemu pniu ważność ruch. Kolana żółtą szczycił Rejtanowi wzrost wytknął kiedym wolnym sploty beczek przedmiot tuszę. Osobno Przyjechawszy blachy swoich witali konstytuować bieży wstał Mickiewiczów trzykrólskie posrebrzanych wyświeconém. Stanął złotego maryasza świadki dozorcę rano plan kosy cugi majowéj. Skał Puste Witaj jarmułek szła Rejtanowi uczą dwoje Pragi Stary nazajutrz. Mody toż gaju nią moki niedosłyszy pocałowania kota już siwy Szczęściem zuchwalstwem. "
-          }
-        ]
-      }
-      images: {
-        create: [
-          {
-            isThumbnail: true
-            filePath: "activities/sample"
-            fileName: "sample_5.png"
-          }
-        ]
-      }
-    }
-  ) {
-    name
-  }
-  rethimnon: createActivity(
-    data: {
-      name: "Rethimnon"
-      shortDescription: "Not him old music think his found enjoy merry."
-      description: "Not him old music think his found enjoy merry. Listening acuteness dependent at or an. Apartments thoroughly unsatiable terminated sex how themselves. She are ten hours wrong walls stand early. Domestic perceive on an ladyship extended received do. Why jennings our whatever his learning gay perceive. Is against no he without subject. Bed connection unreserved preference partiality not unaffected. Years merit trees so think in hoped we as. "
-      pricePerPerson: 8000
-      minPersonCount: 2
-      maxPersonCount: 4
-      category: "cities"
-      difficulty: "easy"
-      earliestStartHour: "08:00"
-      latestStartHour: "14:00"
-      durationHours: "04:00"
-      translations: {
-        create: [
-          {
-            language: "pl"
-            name: "Retymnon"
-            shortDescription: "Rydze krzątała piły Zmierzyła ludzi nasze Dąbrowski skończyć zaśmiały koło młodszéj."
-            description: "Rydze krzątała piły Zmierzyła ludzi nasze Dąbrowski skończyć zaśmiały koło młodszéj. Rzeczypospolitéj Mamy nikt tych kota Bóg najpiękniejszéj Ogon Dóm Najpiękniejszego wina. Całe minut dozor rosciągnionych pokrewieństwem czego dojeżdżaczów bezprzykładną polem. Kościuszkowskie smyk Niesiołowskiemu mury nierostrzygniony zacz Usta żołniersczyzny najpiękniejszym inne woli. Nią Białopiotrowiczem moja byli Zaś. Mieni Daruj samą Przecież będziesz miły nowym czytając wleciała lancy. Jedną ozwał obicia łące zrobim. Umysłami hordą rodziców zaszyt powiewami kłócić płaci rączy Wysadził swoją. Nikt moki mody kweście Herb niejedli wjechał stoi Używać pól. Nierostrzygniony probie najpiękniejszym Nieraz żołniersczyzny Kościuszkowskie Niesiołowskiemu sprawa czuję."
-          }
-        ]
-      }
-      images: {
-        create: [
-          {
-            isThumbnail: true
-            filePath: "activities/sample"
-            fileName: "sample_6.png"
+            language: PL
+            name: "Dzikie Plaże Południowej Krety"
+            shortDescription: ""
+            description: ""
           }
         ]
       }

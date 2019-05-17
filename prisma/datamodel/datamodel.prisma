@@ -53,7 +53,7 @@ type ActivityCategoryTranslation {
   activityCategory: ActivityCategory!
   language: Language!
   name: String! @unique
-  description: String!
+  description: String
 }
 
 type Image {
